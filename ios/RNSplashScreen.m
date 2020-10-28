@@ -1,3 +1,4 @@
+
 /**
  * SplashScreen
  * 启动屏
@@ -34,7 +35,10 @@ RCT_EXPORT_MODULE(SplashScreen)
 
 + (void)showSplash:(NSString*)splashScreen inRootView:(UIView*)rootView {
     if (!loadingView) {
-        loadingView = [[[NSBundle mainBundle] loadNibNamed:splashScreen owner:self options:nil] objectAtIndex:0];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:splashScreen bundle:nil];
+        UIViewController *vc = [sb instantiateViewControllerWithIdentifier:splashScreen];
+        
+        loadingView = vc.view;
         CGRect frame = rootView.frame;
         frame.origin = CGPointMake(0, 0);
         loadingView.frame = frame;
